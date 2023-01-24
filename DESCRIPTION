@@ -15,8 +15,10 @@ Depends:
 LazyData: true
 Suggests: 
     knitr,
-    rmarkdown
+    rmarkdown,
+    testthat (>= 3.0.0)
 VignetteBuilder: knitr
 Imports: 
     assertive,
     dplyr
+Config/testthat/edition: 3
