@@ -1,0 +1,60 @@
+---
+title: "Wine Reviews EDA"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Wine Reviews EDA}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(WineReviews)
+```
+
+```{r}
+# load the previously created wine_data data frame
+data(wine_data)
+```
+
+```{r}
+summary(wine_data)
+```
+
+```{r}
+wine_data$clean_price <- ifelse(wine_data$price, 
+                                mean(wine_data$price, na.rm = TRUE), 
+                                wine_data$price)
+
+```
+
+```{r}
+replace_na_with_mean <- function(numeric_vector) {
+  ifelse(numeric_vector, 
+         mean(numeric_vector, na.rm = TRUE),
+         numeric_vector)
+}
+wine_data$clean_price <- replace_na_with_mean(wine_data$price)
+
+```
+
+```{r}
+replace_na_with_mean <- function(numeric_vector) {
+  assertive::assert_is_numeric(numeric_vector)
+  ifelse(numeric_vector, 
+         mean(numeric_vector, na.rm = TRUE),
+         numeric_vector)
+}
+wine_data$clean_price <- replace_na_with_mean(wine_data$price)
+
+```
+
+```{r}
+summary(wine_data)
+```
